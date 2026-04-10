@@ -860,16 +860,21 @@
         };
 
         fetch(WEBHOOK_URL, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': '*/*' },
-          body:    JSON.stringify(data)
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre_completo: form.querySelector('[name="nombre_completo"]').value.trim(),
+            email:           form.querySelector('[name="email"]').value.trim(),
+            whatsapp:        form.querySelector('[name="whatsapp"]').value.trim(),
+            usuario_social:  form.querySelector('[name="usuario_social"]').value.trim(),
+            plataformas:     document.getElementById('plataformasHidden').value,
+            terminos_aceptados: true,
+            fuente:          'QR-LALEXPO-2026',
+            fecha_registro:  new Date().toISOString()
+          })
         })
-        .then(function () {
-          showSuccess();
-        })
-        .catch(function () {
-          showSuccess();
-        });
+        .then(function() { showSuccess(); })
+        .catch(function() { showSuccess(); });
       });
 
       function highlightError(el) {
