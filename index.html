@@ -428,10 +428,118 @@
       width: 100%;
     }
 
+    /* ── CHECKBOXES PLATAFORMAS ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.2s;
+    }
+
+    .check-item:hover {
+      border-color: rgba(30,144,255,0.3);
+      background: rgba(30,144,255,0.06);
+    }
+
+    .check-item input[type="checkbox"] { display: none; }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .check-item input:checked ~ .check-box {
+      background: #1E90FF;
+      border-color: #1E90FF;
+    }
+
+    .check-item input:checked ~ .check-box::after {
+      content: '✓';
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .check-item input:checked ~ .check-label {
+      color: #1E90FF;
+    }
+
+    .check-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    /* ── VALIDATION BOX ── */
+    .validation-box {
+      background: rgba(30,144,255,0.06);
+      border: 1px solid rgba(30,144,255,0.2);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 16px;
+    }
+
+    .validation-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1E90FF;
+      margin-bottom: 8px;
+    }
+
+    .validation-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    .terms-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .terms-check .check-box { margin-top: 2px; flex-shrink: 0; }
+
+    .terms-text {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+
     @media (max-width: 768px) {
-      .video-bg video {
-        display: none;
-      }
+      .video-bg video { display: none; }
+      .check-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ── RESPONSIVE ── */
@@ -527,6 +635,38 @@
               placeholder="@tu_usuario" autocomplete="off" />
           </div>
 
+          <!-- SECCIÓN 1: PLATAFORMAS -->
+          <span class="section-label">¿En qué páginas transmites?</span>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Chaturbate"><span class="check-box"></span><span class="check-label">Chaturbate</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Camsoda"><span class="check-box"></span><span class="check-label">Camsoda</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Stripchat"><span class="check-box"></span><span class="check-label">Stripchat</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="OnlyFans"><span class="check-box"></span><span class="check-label">OnlyFans</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="XLove"><span class="check-box"></span><span class="check-label">XLove</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="MyFreeCams"><span class="check-box"></span><span class="check-label">MyFreeCams</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Flirt4Free"><span class="check-box"></span><span class="check-label">Flirt4Free</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Jasmin"><span class="check-box"></span><span class="check-label">Jasmin</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Streamate"><span class="check-box"></span><span class="check-label">Streamate</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Amateur"><span class="check-box"></span><span class="check-label">Amateur</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="ManyVids"><span class="check-box"></span><span class="check-label">ManyVids</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="IMLive"><span class="check-box"></span><span class="check-label">IMLive</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="AdultWork"><span class="check-box"></span><span class="check-label">AdultWork</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="SinParty"><span class="check-box"></span><span class="check-label">SinParty</span></label>
+            <label class="check-item"><input type="checkbox" name="plataformas" value="Ztreamo"><span class="check-box"></span><span class="check-label">Ztreamo</span></label>
+          </div>
+
+          <!-- SECCIÓN 2: VALIDACIÓN -->
+          <div class="validation-box">
+            <div class="validation-title">Valida tu participación en LALEXPO</div>
+            <div class="validation-text">Para validar tu participación en LALEXPO y activar esta promoción, debes publicar una foto o historia en tus redes sociales donde se vea el logo de G7Cripto en el fondo y compartirla con nosotros por TikTok o Instagram.</div>
+          </div>
+
+          <label class="terms-check">
+            <input type="checkbox" name="terminos" id="terminos" required>
+            <span class="check-box"></span>
+            <span class="terms-text">Acepto los términos y condiciones, el tratamiento de mis datos personales y las condiciones de validación de esta promoción para ser contactada por G7Cripto.</span>
+          </label>
+
           <button type="submit" class="btn-submit" id="submitBtn">
             QUIERO MIS 3 MESES GRATIS &rarr;
           </button>
@@ -538,8 +678,8 @@
         <!-- SUCCESS STATE -->
         <div class="success-state" id="successState" role="alert" aria-live="polite">
           <div class="success-icon">✓</div>
-          <p class="success-title">¡Registro exitoso!</p>
-          <p class="success-sub">Bienvenida a G7Cripto. Un asesor te contactará pronto por WhatsApp.</p>
+          <p class="success-title">¡Listo!</p>
+          <p class="success-sub">Hemos recibido tu registro. Pronto te contactaremos para continuar con la validación y activación de tu beneficio.</p>
         </div>
 
       </div>
@@ -571,18 +711,21 @@
         if (!nombre)   { highlightError(form.nombre_completo); valid = false; }
         if (!email)    { highlightError(form.email);           valid = false; }
         if (!whatsapp) { highlightError(form.whatsapp);        valid = false; }
+        if (!form.terminos.checked) { highlightError(document.getElementById('terminos')); valid = false; }
         if (!valid) return;
 
         submitBtn.disabled    = true;
         submitBtn.textContent = 'Enviando…';
 
         var data = {
-          nombre_completo: nombre,
-          email:           email,
-          whatsapp:        whatsapp,
-          usuario_social:  form.usuario_social.value.trim(),
-          fuente:          'QR-LALEXPO-2026',
-          fecha_registro:  new Date().toISOString()
+          nombre_completo:   nombre,
+          email:             email,
+          whatsapp:          whatsapp,
+          usuario_social:    form.usuario_social.value.trim(),
+          plataformas:       Array.from(document.querySelectorAll('input[name="plataformas"]:checked')).map(function(cb){ return cb.value; }).join(', '),
+          terminos_aceptados: true,
+          fuente:            'QR-LALEXPO-2026',
+          fecha_registro:    new Date().toISOString()
         };
 
         fetch(WEBHOOK_URL, {
