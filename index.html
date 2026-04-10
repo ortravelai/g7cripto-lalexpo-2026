@@ -859,11 +859,9 @@
           fecha_registro:    new Date().toISOString()
         };
 
-        // mode: 'no-cors' evita el preflight CORS — el POST llega siempre a GHL
         fetch(WEBHOOK_URL, {
           method:  'POST',
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
+          headers: { 'Content-Type': 'application/json' },
           body:    JSON.stringify(data)
         })
         .then(function () {
