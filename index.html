@@ -204,24 +204,34 @@
     }
 
     h1 {
-      font-size: 44px;
+      font-size: 58px;
       font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -1px;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
       color: #ffffff;
       margin-bottom: 16px;
+      text-shadow: 0 0 40px rgba(30,144,255,0.3);
     }
 
     h1 .h1-blue {
       color: var(--accent);
+      text-shadow: 0 0 30px rgba(30,144,255,0.5);
+    }
+
+    .h1-underline {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #1E90FF, #00BFFF);
+      border-radius: 2px;
+      margin: 12px auto 0;
     }
 
     .hero-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.60);
-      line-height: 1.65;
+      font-size: 18px;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.7;
       font-weight: 400;
-      max-width: 500px;
+      max-width: 540px;
       margin: 0 auto 20px;
     }
 
@@ -428,7 +438,7 @@
       width: 100%;
     }
 
-    /* ── CHECKBOXES PLATAFORMAS ── */
+    /* ── MULTISELECT PLATAFORMAS ── */
     .section-label {
       font-size: 11px;
       font-weight: 600;
@@ -439,32 +449,117 @@
       margin-bottom: 12px;
     }
 
-    .check-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 24px;
+    .multi-select-wrap { position: relative; margin-bottom: 20px; }
+
+    .multi-select-trigger {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      color: rgba(255,255,255,0.4);
+      font-size: 14px;
+      transition: all 0.2s;
+      user-select: none;
     }
 
-    .check-item {
+    .multi-select-trigger:hover,
+    .multi-select-trigger.active {
+      border-color: rgba(30,144,255,0.6);
+      background: rgba(30,144,255,0.06);
+      color: #fff;
+    }
+
+    .multi-arrow { transition: transform 0.2s; font-size: 10px; }
+    .multi-select-trigger.active .multi-arrow { transform: rotate(180deg); }
+
+    .multi-select-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0; right: 0;
+      background: #0d0d0d;
+      border: 1px solid rgba(30,144,255,0.3);
+      border-radius: 12px;
+      z-index: 100;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    .multi-select-dropdown.open { display: block; }
+
+    .multi-search { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .multi-search input {
+      width: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .multi-options {
+      max-height: 220px;
+      overflow-y: auto;
+      padding: 6px 0;
+    }
+    .multi-options::-webkit-scrollbar { width: 4px; }
+    .multi-options::-webkit-scrollbar-track { background: transparent; }
+    .multi-options::-webkit-scrollbar-thumb { background: rgba(30,144,255,0.3); border-radius: 2px; }
+
+    .multi-option {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      padding: 10px 16px;
       cursor: pointer;
-      padding: 8px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.03);
-      transition: all 0.2s;
+      transition: background 0.15s;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+    .multi-option:hover { background: rgba(30,144,255,0.1); color: #fff; }
+    .multi-option.selected { background: rgba(30,144,255,0.15); color: #1E90FF; }
+    .opt-check {
+      width: 16px; height: 16px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+    }
+    .multi-option.selected .opt-check {
+      background: #1E90FF;
+      border-color: #1E90FF;
+      color: #fff;
     }
 
-    .check-item:hover {
-      border-color: rgba(30,144,255,0.3);
-      background: rgba(30,144,255,0.06);
+    .multi-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+    .multi-footer button {
+      background: #1E90FF;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    .check-item input[type="checkbox"] { display: none; }
-
+    /* ── CHECKBOX BASE (usado por terms-check) ── */
     .check-box {
       width: 16px;
       height: 16px;
@@ -477,26 +572,16 @@
       justify-content: center;
     }
 
-    .check-item input:checked ~ .check-box {
+    .terms-check input[type="checkbox"] { display: none; }
+    .terms-check input:checked ~ .check-box {
       background: #1E90FF;
       border-color: #1E90FF;
     }
-
-    .check-item input:checked ~ .check-box::after {
+    .terms-check input:checked ~ .check-box::after {
       content: '✓';
       color: white;
       font-size: 11px;
       font-weight: 700;
-    }
-
-    .check-item input:checked ~ .check-label {
-      color: #1E90FF;
-    }
-
-    .check-label {
-      font-size: 12px;
-      color: rgba(255,255,255,0.6);
-      font-weight: 500;
     }
 
     /* ── VALIDATION BOX ── */
@@ -539,7 +624,7 @@
 
     @media (max-width: 768px) {
       .video-bg video { display: none; }
-      .check-grid { grid-template-columns: repeat(2, 1fr); }
+      h1 { font-size: 36px !important; letter-spacing: -0.5px !important; }
     }
 
     /* ── RESPONSIVE ── */
@@ -547,7 +632,6 @@
       nav { padding: 0 18px; }
       .page { padding: 24px 16px 40px; }
       .card { padding: 28px 20px 28px; border-radius: 16px; }
-      h1 { font-size: 30px; letter-spacing: -0.5px; }
       .hero-sub { font-size: 15px; }
     }
   </style>
@@ -593,7 +677,8 @@
     <!-- HERO -->
     <div class="hero">
       <h1>G7Cripto te da la<br><span class="h1-blue">BIENVENIDA a LALEXPO</span></h1>
-      <p class="hero-sub">Promoción exclusiva por los 3 días del evento. Regístrate en LALEXPO 2026 y obtén monetización gratis por 3 meses. Aprovecha y ahorra ahora que el dólar está bajo.</p>
+      <div class="h1-underline"></div>
+      <p class="hero-sub" style="margin-top:20px;">Promoción exclusiva por los 3 días del evento. Regístrate en LALEXPO 2026 y obtén <strong style="color:#1E90FF;font-weight:700;">monetización gratis por 3 meses</strong>. Aprovecha y ahorra ahora que <strong style="color:#00BFFF;font-weight:700;">el dólar está bajo</strong>.</p>
       <span class="urgency-pill">⚡ Toma menos de 30 segundos</span>
     </div>
 
@@ -637,23 +722,23 @@
 
           <!-- SECCIÓN 1: PLATAFORMAS -->
           <span class="section-label">¿En qué páginas transmites?</span>
-          <div class="check-grid">
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Chaturbate"><span class="check-box"></span><span class="check-label">Chaturbate</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Camsoda"><span class="check-box"></span><span class="check-label">Camsoda</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Stripchat"><span class="check-box"></span><span class="check-label">Stripchat</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="OnlyFans"><span class="check-box"></span><span class="check-label">OnlyFans</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="XLove"><span class="check-box"></span><span class="check-label">XLove</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="MyFreeCams"><span class="check-box"></span><span class="check-label">MyFreeCams</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Flirt4Free"><span class="check-box"></span><span class="check-label">Flirt4Free</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Jasmin"><span class="check-box"></span><span class="check-label">Jasmin</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Streamate"><span class="check-box"></span><span class="check-label">Streamate</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Amateur"><span class="check-box"></span><span class="check-label">Amateur</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="ManyVids"><span class="check-box"></span><span class="check-label">ManyVids</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="IMLive"><span class="check-box"></span><span class="check-label">IMLive</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="AdultWork"><span class="check-box"></span><span class="check-label">AdultWork</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="SinParty"><span class="check-box"></span><span class="check-label">SinParty</span></label>
-            <label class="check-item"><input type="checkbox" name="plataformas" value="Ztreamo"><span class="check-box"></span><span class="check-label">Ztreamo</span></label>
+          <div class="multi-select-wrap">
+            <div class="multi-select-trigger" id="platformTrigger" onclick="togglePlatforms()">
+              <span id="platformLabel">Selecciona las plataformas</span>
+              <span class="multi-arrow">▼</span>
+            </div>
+            <div class="multi-select-dropdown" id="platformDropdown">
+              <div class="multi-search">
+                <input type="text" placeholder="Buscar plataforma..." id="platformSearch" oninput="filterPlatforms(this.value)">
+              </div>
+              <div class="multi-options" id="platformOptions"></div>
+              <div class="multi-footer">
+                <span id="selectedCount">0 seleccionadas</span>
+                <button type="button" onclick="togglePlatforms()">Listo ✓</button>
+              </div>
+            </div>
           </div>
+          <input type="hidden" name="plataformas" id="plataformasHidden">
 
           <!-- SECCIÓN 2: VALIDACIÓN -->
           <div class="validation-box">
@@ -693,6 +778,77 @@
   </footer>
 
   <script>
+    /* ── MULTISELECT PLATAFORMAS ── */
+    var PLATFORMS = ['Chaturbate','Camsoda','Stripchat','OnlyFans','XLove',
+      'MyFreeCams','Flirt4Free','Jasmin','Streamate','Amateur',
+      'ManyVids','IMLive','AdultWork','SinParty','Ztreamo'];
+
+    var selectedPlatforms = [];
+
+    function initPlatforms() {
+      var container = document.getElementById('platformOptions');
+      container.innerHTML = PLATFORMS.map(function(p) {
+        return '<div class="multi-option" data-value="' + p + '" onclick="toggleOption(this)">' +
+               '<span class="opt-check"></span><span>' + p + '</span></div>';
+      }).join('');
+    }
+
+    function togglePlatforms() {
+      var dropdown = document.getElementById('platformDropdown');
+      var trigger  = document.getElementById('platformTrigger');
+      dropdown.classList.toggle('open');
+      trigger.classList.toggle('active');
+    }
+
+    function toggleOption(el) {
+      var val = el.dataset.value;
+      el.classList.toggle('selected');
+      var check = el.querySelector('.opt-check');
+      if (el.classList.contains('selected')) {
+        selectedPlatforms.push(val);
+        check.textContent = '✓';
+      } else {
+        selectedPlatforms = selectedPlatforms.filter(function(p){ return p !== val; });
+        check.textContent = '';
+      }
+      updatePlatformLabel();
+    }
+
+    function updatePlatformLabel() {
+      var label = document.getElementById('platformLabel');
+      var count = document.getElementById('selectedCount');
+      count.textContent = selectedPlatforms.length + ' seleccionadas';
+      if (selectedPlatforms.length === 0) {
+        label.textContent = 'Selecciona las plataformas';
+        label.style.color = 'rgba(255,255,255,0.4)';
+      } else if (selectedPlatforms.length <= 3) {
+        label.textContent = selectedPlatforms.join(', ');
+        label.style.color = '#fff';
+      } else {
+        label.textContent = selectedPlatforms.length + ' plataformas seleccionadas';
+        label.style.color = '#1E90FF';
+      }
+      document.getElementById('plataformasHidden').value = selectedPlatforms.join(', ');
+    }
+
+    function filterPlatforms(query) {
+      document.querySelectorAll('.multi-option').forEach(function(opt) {
+        opt.style.display = opt.dataset.value.toLowerCase().indexOf(query.toLowerCase()) !== -1 ? '' : 'none';
+      });
+    }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.multi-select-wrap')) {
+        var dd = document.getElementById('platformDropdown');
+        var tr = document.getElementById('platformTrigger');
+        if (dd) dd.classList.remove('open');
+        if (tr) tr.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', initPlatforms);
+
+    /* ── FORM ── */
     (function () {
       var WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/A04momZyXbXrZUdy2nT1/webhook-trigger/35fa3d3a-82dc-4b49-b967-3f8ebe878902";
 
@@ -722,7 +878,7 @@
           email:             email,
           whatsapp:          whatsapp,
           usuario_social:    form.usuario_social.value.trim(),
-          plataformas:       Array.from(document.querySelectorAll('input[name="plataformas"]:checked')).map(function(cb){ return cb.value; }).join(', '),
+          plataformas:       document.getElementById('plataformasHidden').value,
           terminos_aceptados: true,
           fuente:            'QR-LALEXPO-2026',
           fecha_registro:    new Date().toISOString()
@@ -780,7 +936,7 @@
         form.style.display    = 'none';
         success.style.display = 'block';
       }
-    })();
+    }());
   </script>
 
 </body>
