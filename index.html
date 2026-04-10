@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G7Cripto · LALEXPO 2026</title>
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0B1929;
+      --bg2:     #0f2035;
+      --accent:  #1E90FF;
+      --accent2: #00BFFF;
+      --text:    #F0F4FF;
+      --muted:   #7A9CC0;
+      --line:    rgba(30,144,255,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── BACKGROUND ATMOSPHERE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 88% 4%,  rgba(30,144,255,0.20) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 45% at 8%  96%, rgba(0,191,255,0.10)  0%, transparent 70%),
+        repeating-linear-gradient(0deg,  transparent, transparent 47px, rgba(30,144,255,0.03) 48px),
+        repeating-linear-gradient(90deg, transparent, transparent 47px, rgba(30,144,255,0.03) 48px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(11,25,41,0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .logo-img {
+      height: 44px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(30,144,255,0.38);
+      background: rgba(30,144,255,0.08);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* ── PAGE WRAPPER ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px 40px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      max-width: 640px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(64px, 15vw, 140px);
+      font-weight: 700;
+      letter-spacing: 8px;
+      color: var(--text);
+      opacity: 0.05;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid rgba(0,191,255,0.30);
+      background: rgba(0,191,255,0.07);
+      padding: 7px 18px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--accent2);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(0,191,255,0.55); }
+      50%       { opacity: 0.65; transform: scale(1.25); box-shadow: 0 0 0 7px rgba(0,191,255,0); }
+    }
+
+    h1 {
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ── CARD ── */
+    .card-wrap {
+      width: 100%;
+      max-width: 680px;
+      animation: card-in 0.6s ease both;
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid rgba(30,144,255,0.25);
+      border-radius: 20px;
+      padding: 32px 36px 36px;
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.60),
+        0 0 60px rgba(30,144,255,0.06) inset;
+      position: relative;
+      overflow: visible;
+    }
+
+    /* Top accent line */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+      pointer-events: none;
+    }
+
+    /* HUD corner brackets */
+    .hud-tl,
+    .hud-tr,
+    .hud-bl,
+    .hud-br {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: rgba(30,144,255,0.42);
+      border-style: solid;
+      pointer-events: none;
+    }
+    .hud-tl { top: 14px; left: 14px;  border-width: 2px 0 0 2px; }
+    .hud-tr { top: 14px; right: 14px; border-width: 2px 2px 0 0; }
+    .hud-bl { bottom: 14px; left: 14px;  border-width: 0 0 2px 2px; }
+    .hud-br { bottom: 14px; right: 14px; border-width: 0 2px 2px 0; }
+
+    /* ── FORM ── */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-full {
+      margin-bottom: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    input,
+    select {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(30,144,255,0.15);
+      border-radius: 10px;
+      padding: 11px 14px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder { color: rgba(122,156,192,0.50); }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(30,144,255,0.70);
+      box-shadow: 0 0 0 3px rgba(30,144,255,0.12);
+      background: rgba(30,144,255,0.04);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231E90FF' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+      cursor: pointer;
+      background-color: rgba(255,255,255,0.04);
+    }
+
+    select option {
+      background: #0f2035;
+      color: var(--text);
+    }
+
+    /* ── BUTTON ── */
+    .btn-submit {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--accent);
+      border: none;
+      border-radius: 12px;
+      padding: 15px 24px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 6px;
+      box-shadow: 0 4px 32px rgba(30,144,255,0.40);
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      display: block;
+    }
+
+    .btn-submit:hover {
+      background: #1a7de0;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 52px rgba(30,144,255,0.60);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 24px rgba(30,144,255,0.35);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── PRIVACY ── */
+    .privacy {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 28px 0;
+      animation: card-in 0.5s ease both;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(30,144,255,0.12);
+      border: 2px solid rgba(30,144,255,0.48);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 30px;
+      color: var(--accent);
+      box-shadow: 0 0 32px rgba(30,144,255,0.20);
+    }
+
+    .success-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .success-sub {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 20px;
+      border-top: 1px solid var(--line);
+      margin-top: 32px;
+      width: 100%;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 18px; }
+      .page { padding: 20px 14px 32px; }
+      .card { padding: 24px 16px 28px; border-radius: 16px; }
+      .form-grid-2 { grid-template-columns: 1fr; gap: 10px; }
+      h1 { font-size: 22px; }
+      .hero-watermark { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <img src="NUEVO%20LOGO%20G7%20CRIPTO-02.svg" alt="G7" style="height:36px; width:auto; filter:brightness(0) invert(1);">
+      <span style="font-size:18px; font-weight:800; color:#fff; letter-spacing:-0.5px;">G7<span style="color:#1E90FF;">Cripto</span></span>
+    </div>
+    <span class="nav-badge">LALEXPO 2026</span>
+  </nav>
+
+  <!-- PAGE -->
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-watermark" aria-hidden="true">G7CRIPTO</div>
+      <div class="hero-inner">
+        <div class="hero-pill">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          Stand Oficial &middot; LALEXPO 2026
+        </div>
+        <h1>Únete a la comunidad financiera más grande de LATAM</h1>
+        <p class="hero-sub">Regístrate y un asesor de G7Cripto te contactará personalmente</p>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card-wrap">
+      <div class="card">
+
+        <!-- HUD Corners -->
+        <span class="hud-tl" aria-hidden="true"></span>
+        <span class="hud-tr" aria-hidden="true"></span>
+        <span class="hud-bl" aria-hidden="true"></span>
+        <span class="hud-br" aria-hidden="true"></span>
+
+        <!-- FORM -->
+        <form id="leadForm" novalidate>
+
+          <!-- Fila 1: Nombre · Apellidos -->
+          <div class="form-grid-2">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre"
+                placeholder="Tu nombre" autocomplete="given-name" />
+            </div>
+            <div class="field">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" name="apellidos"
+                placeholder="Apellidos" autocomplete="family-name" />
+            </div>
+          </div>
+
+          <!-- Fila 2: WhatsApp · Email -->
+          <div class="form-grid-2">
+            <div class="field">
+              <label for="whatsapp">WhatsApp *</label>
+              <input type="tel" id="whatsapp" name="whatsapp"
+                placeholder="+57 300 000 0000" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email"
+                placeholder="correo@email.com" autocomplete="email" required />
+            </div>
+          </div>
+
+          <!-- Fila 3: País · Ciudad -->
+          <div class="form-grid-2">
+            <div class="field">
+              <label for="pais">País</label>
+              <input type="text" id="pais" name="pais"
+                placeholder="Colombia" autocomplete="country-name" />
+            </div>
+            <div class="field">
+              <label for="ciudad">Ciudad</label>
+              <input type="text" id="ciudad" name="ciudad"
+                placeholder="Bogotá" autocomplete="address-level2" />
+            </div>
+          </div>
+
+          <!-- Fila 4: ¿Cómo conoció? -->
+          <div class="form-full">
+            <div class="field">
+              <label for="como_conocio">¿Cómo conoció G7Cripto?</label>
+              <select id="como_conocio" name="como_conocio">
+                <option value="">Selecciona una opción</option>
+                <option value="En el evento LALEXPO">En el evento LALEXPO</option>
+                <option value="Redes sociales">Redes sociales</option>
+                <option value="Referido de un amigo">Referido de un amigo</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Google / Internet">Google / Internet</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Fila 5: Plataformas -->
+          <div class="form-full">
+            <div class="field">
+              <label for="plataformas">Plataformas que monetizas actualmente</label>
+              <input type="text" id="plataformas" name="plataformas"
+                placeholder="Ej: OnlyFans, Fansly, ManyVids, Patreon..." />
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit" id="submitBtn">
+            QUIERO QUE ME CONTACTEN &rarr;
+          </button>
+
+          <p class="privacy">🔒 Tus datos están protegidos &middot; Solo uso interno G7Cripto</p>
+
+        </form>
+
+        <!-- SUCCESS STATE -->
+        <div class="success-state" id="successState" role="alert" aria-live="polite">
+          <div class="success-icon">✓</div>
+          <p class="success-title">¡Registro exitoso!</p>
+          <p class="success-sub">Un asesor de G7Cripto te contactará<br>pronto por WhatsApp</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    G7Cripto &copy; 2026 &middot; Evento LALEXPO &middot; Todos los derechos reservados
+  </footer>
+
+  <script>
+    (function () {
+      var WEBHOOK_URL = "https://services.leadconnectorhq.com/hooks/A04momZyXbXrZUdy2nT1/webhook-trigger/ba010bd8-037e-4140-b254-6f0a1329d47e";
+
+      var form      = document.getElementById('leadForm');
+      var submitBtn = document.getElementById('submitBtn');
+      var success   = document.getElementById('successState');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var whatsapp = form.whatsapp.value.trim();
+        var email    = form.email.value.trim();
+
+        if (!whatsapp || !email) {
+          if (!whatsapp) highlightError(form.whatsapp);
+          if (!email)    highlightError(form.email);
+          return;
+        }
+
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Enviando…';
+
+        var data = {
+          nombre:         form.nombre.value.trim(),
+          apellidos:      form.apellidos.value.trim(),
+          whatsapp:       whatsapp,
+          email:          email,
+          pais:           form.pais.value.trim(),
+          ciudad:         form.ciudad.value.trim(),
+          como_conocio:   form.como_conocio.value,
+          plataformas:    form.plataformas.value.trim(),
+          fuente:         'QR-LALEXPO-2026',
+          fecha_registro: new Date().toISOString()
+        };
+
+        // Strategy 1: fetch con JSON real (GHL soporta CORS — ideal para reference mapping)
+        // Strategy 2: si falla por CORS, hidden form como respaldo garantizado
+        fetch(WEBHOOK_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(data)
+        })
+        .then(function () {
+          showSuccess();
+        })
+        .catch(function () {
+          // CORS bloqueado → enviar via form oculto (no usa CORS)
+          var iframeName = 'ghl_' + Date.now();
+          var iframe = document.createElement('iframe');
+          iframe.name = iframeName;
+          iframe.style.cssText = 'display:none;position:absolute;width:0;height:0;border:0;';
+          document.body.appendChild(iframe);
+
+          var hf = document.createElement('form');
+          hf.method = 'POST';
+          hf.action = WEBHOOK_URL;
+          hf.target = iframeName;
+          hf.style.display = 'none';
+
+          Object.keys(data).forEach(function (key) {
+            var inp = document.createElement('input');
+            inp.type = 'hidden'; inp.name = key; inp.value = data[key];
+            hf.appendChild(inp);
+          });
+
+          document.body.appendChild(hf);
+          hf.submit();
+
+          setTimeout(function () {
+            showSuccess();
+            try { document.body.removeChild(hf); document.body.removeChild(iframe); } catch (e) {}
+          }, 600);
+        });
+      });
+
+      function highlightError(el) {
+        el.style.borderColor = 'rgba(255,80,80,0.70)';
+        el.style.boxShadow   = '0 0 0 3px rgba(255,80,80,0.12)';
+        el.focus();
+        el.addEventListener('input', function () {
+          el.style.borderColor = '';
+          el.style.boxShadow   = '';
+        }, { once: true });
+      }
+
+      function showSuccess() {
+        form.style.display    = 'none';
+        success.style.display = 'block';
+      }
+    })();
+  </script>
+
+</body>
+</html>
