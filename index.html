@@ -40,21 +40,25 @@
     /* ── VIDEO BACKGROUND ── */
     .video-bg {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 0;
       overflow: hidden;
       background-image: url('g7bg.png');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
     }
 
     .video-bg video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.18;
+      opacity: 0.20;
       filter: saturate(1.4) brightness(0.8);
     }
 
@@ -198,6 +202,8 @@
 
     /* ── HERO ── */
     .hero {
+      position: relative;
+      z-index: 1;
       text-align: center;
       max-width: 600px;
       margin: 0 auto 32px;
@@ -251,6 +257,8 @@
 
     /* ── CARD ── */
     .card-wrap {
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 500px;
       margin: 0 auto;
