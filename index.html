@@ -859,41 +859,18 @@
           fecha_registro:    new Date().toISOString()
         };
 
+        // mode: 'no-cors' evita el preflight CORS — el POST llega siempre a GHL
         fetch(WEBHOOK_URL, {
           method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
+          mode:    'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
           body:    JSON.stringify(data)
         })
         .then(function () {
           showSuccess();
         })
         .catch(function () {
-          // CORS fallback via hidden form
-          var iframeName = 'ghl_' + Date.now();
-          var iframe = document.createElement('iframe');
-          iframe.name = iframeName;
-          iframe.style.cssText = 'display:none;position:absolute;width:0;height:0;border:0;';
-          document.body.appendChild(iframe);
-
-          var hf = document.createElement('form');
-          hf.method  = 'POST';
-          hf.action  = WEBHOOK_URL;
-          hf.target  = iframeName;
-          hf.style.display = 'none';
-
-          Object.keys(data).forEach(function (key) {
-            var inp = document.createElement('input');
-            inp.type = 'hidden'; inp.name = key; inp.value = data[key];
-            hf.appendChild(inp);
-          });
-
-          document.body.appendChild(hf);
-          hf.submit();
-
-          setTimeout(function () {
-            showSuccess();
-            try { document.body.removeChild(hf); document.body.removeChild(iframe); } catch (err) {}
-          }, 600);
+          showSuccess();
         });
       });
 
