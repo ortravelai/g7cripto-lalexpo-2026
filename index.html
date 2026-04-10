@@ -32,6 +32,34 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── VIDEO BACKGROUND ── */
+    .video-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      filter: saturate(1.4) brightness(0.8);
+    }
+
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(7,7,7,0.75) 0%,
+        rgba(7,7,7,0.55) 40%,
+        rgba(7,7,7,0.75) 100%
+      );
+    }
+
     /* ── BACKGROUND ── */
     body::before {
       content: '';
@@ -403,6 +431,14 @@
   </style>
 </head>
 <body>
+
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="G7_coin_rotating_202604100922.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay"></div>
+  </div>
 
   <!-- NAVBAR -->
   <nav>
